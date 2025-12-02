@@ -5,7 +5,7 @@ import numpy as np
 np.random.seed(42)
 
 # Generate 500 events
-n = 500
+n = 1000
 event_types = ['Wedding', 'Corporate', 'Networking']
 seasons = ['Spring', 'Summer', 'Winter']
 

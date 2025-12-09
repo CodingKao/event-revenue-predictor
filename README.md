@@ -2,21 +2,21 @@
 
 ### 📊 Data Science + Financial Analytics Project
 
-This project uses **Python regression modeling** to help a catering business **predict event revenue** based on several key factors — such as number of guests, event type, menu tier, and add-ons.  
+This project applies **Python-based regression modeling** to help a catering business **predict event revenue** using key business drivers — such as the number of guests, event type, menu tier, and add-ons.  
 
-The goal is to help sales and finance teams **accurately quote catering events** and understand which business drivers most affect profitability.
+The objective is to enable sales and finance teams to **quote events more accurately** and identify which factors most influence profitability.
 
 ---
 
 ## 🚀 Project Overview
 
-**Objective:**  
-Build a data-driven model to predict total event revenue and uncover key factors influencing profitability.
+**Goal:**  
+Develop a data-driven model to forecast catering event revenue and uncover the strongest predictors of profitability.
 
 **Key Results:**
-- Achieved an **R² = 0.8345** and **Adjusted R² = 0.8315**, explaining **83% of the variation in event revenue**.  
-- Identified that **number of guests, menu tier, and event type** are the strongest predictors of revenue.  
-- Seasonal effects were **not statistically significant**, meaning pricing and demand remain stable throughout the year.
+- Achieved an **R² = 0.8345** and **Adjusted R² = 0.8315**, meaning the model explains **83% of revenue variation**.  
+- Found that **guest count, event type, and menu tier** are the most impactful variables.  
+- Seasonal effects were **not statistically significant**, suggesting consistent pricing and demand throughout the year.
 
 ---
 
@@ -35,7 +35,7 @@ Build a data-driven model to predict total event revenue and uncover key factors
 ## 🧩 Project Workflow
 
 ### 1️⃣ Data Generation  
-Synthetic data was generated to simulate 500 catering events, with features such as:
+Synthetic financial data was created to simulate 500 catering events with the following features:
 - `Guests` (20–500)  
 - `Event_Type` (Wedding, Corporate, Birthday)  
 - `Menu_Tier` (Basic, Standard, Premium)  
@@ -43,19 +43,25 @@ Synthetic data was generated to simulate 500 catering events, with features such
 - `Add_Ons` (0–5 optional services)
 
 ### 2️⃣ Exploratory Data Analysis (EDA)
-- Reviewed distributions, correlations, and pairplots to identify strong predictors of revenue.  
-- Found strong linear relationships between revenue, guests, and menu tier.
+- Explored variable distributions, correlations, and pairwise relationships.  
+- Found strong linear relationships between revenue, guest count, and menu tier.
+
+![Event Distribution](images/catering-event-distribution.png)
+![Pairplot](images/catering-event-pairplot.png)
 
 ### 3️⃣ Regression Modeling
 - Built an **Ordinary Least Squares (OLS)** regression model using `statsmodels`.  
-- Examined coefficients, p-values, and model assumptions.  
-- Achieved strong model performance (Adjusted R² = 0.8315).
+- Evaluated coefficient significance, p-values, and regression assumptions.  
+- Achieved robust performance with **Adjusted R² = 0.8315**.
 
-### 4️⃣ Model Interpretation
+---
+
+## 🧾 Model Interpretation
+
 | Variable | Coefficient | P-Value | Interpretation |
 |-----------|-------------|---------|----------------|
 | **Guests** | 86.02 | 0.000 | Each additional guest adds ≈ **\$86** to revenue. |
-| **Add_Ons** | 369.12 | 0.054 | Each add-on contributes ≈ **\$369** to revenue. (Marginal significance) |
+| **Add_Ons** | 369.12 | 0.054 | Each add-on contributes ≈ **\$369** to revenue (marginally significant). |
 | **Event_Type_Corporate** | 3,806 | 0.000 | Corporate events earn ≈ **\$3,800** more than birthdays. |
 | **Event_Type_Wedding** | 10,560 | 0.000 | Weddings earn ≈ **\$10,500** more than birthdays. |
 | **Menu_Tier_Standard** | 4,735 | 0.000 | Standard menus earn ≈ **\$4,700** more than Basic menus. |
@@ -64,7 +70,7 @@ Synthetic data was generated to simulate 500 catering events, with features such
 
 ---
 
-## 🧾 Regression Equation
+### 📐 Regression Equation
 
 **Revenue = -\$11,610**  
 + (\$86.02 × Guests)  
@@ -72,12 +78,8 @@ Synthetic data was generated to simulate 500 catering events, with features such
 + (\$3,806 × Event_Type_Corporate)  
 + (\$10,560 × Event_Type_Wedding)  
 + (\$4,735 × Menu_Tier_Standard)  
-+ (\$10,240 × Menu_Tier_Premium)
++ (\$10,240 × Menu_Tier_Premium)  
 
-
-Revenue=−11,610+(86.02×Guests)+(369.12×Add_Ons)+(3,806×Event_Type_Corporate)+(10,560×Event_Type_Wedding)+(4,735×Menu_Tier_Standard)+(10,240×Menu_Tier_Premium)
-
-  
 *(Seasonal variables excluded — not statistically significant.)*
 
 ---
@@ -88,10 +90,9 @@ Revenue=−11,610+(86.02×Guests)+(369.12×Add_Ons)+(3,806×Event_Type_Corporate
 |----------------|-------------|
 | **Pairplot / Correlation Matrix** | Reveals strong linear correlation between guests, menu tier, and revenue. |
 | **Predicted vs Actual Scatterplot** | Shows high model accuracy and low residual error. |
-| **Feature Importance Bar Chart** | Highlights which variables contribute most to revenue. |
-| **Residual Distribution Plot** | Confirms normally distributed residuals (valid regression assumptions). |
 
-Example Plots:
+![Predicted vs Actual Revenue](images/catering-event-predicted-vs-actual.png)
+
 ```python
 plt.scatter(model.fittedvalues, y, alpha=0.6)
 plt.xlabel("Predicted Revenue")

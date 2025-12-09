@@ -66,13 +66,17 @@ Synthetic data was generated to simulate 500 catering events, with features such
 
 ## 🧾 Regression Equation
 
-**Revenue = -11,610**  
-+ (86.02 × Guests)  
-+ (369.12 × Add_Ons)  
-+ (3,806 × Event_Type_Corporate)  
-+ (10,560 × Event_Type_Wedding)  
-+ (4,735 × Menu_Tier_Standard)  
-+ (10,240 × Menu_Tier_Premium)
+**Revenue = -\$11,610**  
++ (\$86.02 × Guests)  
++ (\$369.12 × Add_Ons)  
++ (\$3,806 × Event_Type_Corporate)  
++ (\$10,560 × Event_Type_Wedding)  
++ (\$4,735 × Menu_Tier_Standard)  
++ (\$10,240 × Menu_Tier_Premium)
+
+
+Revenue=−11,610+(86.02×Guests)+(369.12×Add_Ons)+(3,806×Event_Type_Corporate)+(10,560×Event_Type_Wedding)+(4,735×Menu_Tier_Standard)+(10,240×Menu_Tier_Premium)
+
   
 *(Seasonal variables excluded — not statistically significant.)*
 

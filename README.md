@@ -1,78 +1,96 @@
-# 🍽️ Catering Revenue Predictive Analysis
+# 🍽️ Catering Event Revenue Prediction (Regression Analysis)
 
-## 📊 Overview
-This project uses **predictive analytics** to estimate catering event revenue based on various cost and event factors.  
-It’s designed for catering businesses that want to **optimize pricing, improve forecasting, and evaluate profitability** across different event types such as weddings, corporate events, and networking functions.
+### 📊 Data Science + Financial Analytics Project
 
-The dataset used here is **synthetically generated using Python**, allowing full control and reproducibility.
+This project uses **Python regression modeling** to help a catering business **predict event revenue** based on several key factors — such as number of guests, event type, menu tier, and add-ons.  
+
+The goal is to help sales and finance teams **accurately quote catering events** and understand which business drivers most affect profitability.
 
 ---
 
-## 🧠 Objective
-Build a machine learning model that predicts **total event revenue** given input variables such as:
-- Food cost
-- Labor hours
-- Guest count
-- Event type (Wedding, Corporate, Networking)
-- Season and location
+## 🚀 Project Overview
 
-The model aims to support **pricing decisions, cost forecasting, and revenue optimization** for catering businesses.
+**Objective:**  
+Build a data-driven model to predict total event revenue and uncover key factors influencing profitability.
+
+**Key Results:**
+- Achieved an **R² = 0.8345** and **Adjusted R² = 0.8315**, explaining **83% of the variation in event revenue**.  
+- Identified that **number of guests, menu tier, and event type** are the strongest predictors of revenue.  
+- Seasonal effects were **not statistically significant**, meaning pricing and demand remain stable throughout the year.
+
+---
+
+## 🛠️ Tools & Technologies
+
+| Category | Tools |
+|-----------|--------|
+| **Programming** | Python |
+| **Data Analysis** | Pandas, NumPy |
+| **Modeling** | Statsmodels, Scikit-learn |
+| **Visualization** | Matplotlib, Seaborn |
+| **Environment** | Jupyter Notebook, VS Code |
 
 ---
 
 ## 🧩 Project Workflow
 
-1. **Data Generation**
-   - Generate a synthetic dataset (`synthetic_catering_data.csv`) with random but realistic cost and event values.
-   - Dataset includes columns such as:
-     - `event_type`
-     - `guest_count`
-     - `food_cost`
-     - `labor_hours`
-     - `equipment_cost`
-     - `beverage_cost`
-     - `season`
-     - `revenue` *(target variable)*
+### 1️⃣ Data Generation  
+Synthetic data was generated to simulate 500 catering events, with features such as:
+- `Guests` (20–500)  
+- `Event_Type` (Wedding, Corporate, Birthday)  
+- `Menu_Tier` (Basic, Standard, Premium)  
+- `Season` (Spring, Summer, Fall, Winter)  
+- `Add_Ons` (0–5 optional services)
 
-2. **Exploratory Data Analysis (EDA)**
-   - Identify relationships between costs and revenue.
-   - Visualize distributions and correlations using seaborn and matplotlib.
+### 2️⃣ Exploratory Data Analysis (EDA)
+- Reviewed distributions, correlations, and pairplots to identify strong predictors of revenue.  
+- Found strong linear relationships between revenue, guests, and menu tier.
 
-3. **Feature Engineering**
-   - Add derived variables like `cost_per_guest` and interaction features.
-   - Encode categorical features (e.g., `event_type`, `season`).
+### 3️⃣ Regression Modeling
+- Built an **Ordinary Least Squares (OLS)** regression model using `statsmodels`.  
+- Examined coefficients, p-values, and model assumptions.  
+- Achieved strong model performance (Adjusted R² = 0.8315).
 
-4. **Model Training**
-   - Train regression models to predict revenue:
-     - Linear Regression (baseline)
-     - Random Forest Regressor (optimized)
-   - Evaluate using MAE, RMSE, and R² metrics.
-
-5. **Scenario Analysis**
-   - Predict revenue for custom event inputs.
-   - Test “what-if” scenarios (e.g., rising food cost or higher guest count).
-
-6. **Visualization**
-   - Compare predicted vs. actual revenue.
-   - Create feature importance plots to identify key drivers.
+### 4️⃣ Model Interpretation
+| Variable | Coefficient | P-Value | Interpretation |
+|-----------|-------------|---------|----------------|
+| **Guests** | 86.02 | 0.000 | Each additional guest adds ≈ **\$86** to revenue. |
+| **Add_Ons** | 369.12 | 0.054 | Each add-on contributes ≈ **\$369** to revenue. (Marginal significance) |
+| **Event_Type_Corporate** | 3,806 | 0.000 | Corporate events earn ≈ **\$3,800** more than birthdays. |
+| **Event_Type_Wedding** | 10,560 | 0.000 | Weddings earn ≈ **\$10,500** more than birthdays. |
+| **Menu_Tier_Standard** | 4,735 | 0.000 | Standard menus earn ≈ **\$4,700** more than Basic menus. |
+| **Menu_Tier_Premium** | 10,240 | 0.000 | Premium menus earn ≈ **\$10,200** more than Basic menus. |
+| **Season Variables** | — | >0.05 | No statistically significant effect. |
 
 ---
 
-## 🧰 Tools & Libraries
-- Python 3.10+
-- pandas, numpy
-- scikit-learn
-- matplotlib, seaborn
-- Jupyter Notebook
+## 🧾 Regression Equation
+
+**Revenue = -11,610**  
++ (86.02 × Guests)  
++ (369.12 × Add_Ons)  
++ (3,806 × Event_Type_Corporate)  
++ (10,560 × Event_Type_Wedding)  
++ (4,735 × Menu_Tier_Standard)  
++ (10,240 × Menu_Tier_Premium)
+  
+*(Seasonal variables excluded — not statistically significant.)*
 
 ---
 
-## 💡 Business Application
-This model can be applied by catering businesses to:
-- **Estimate event pricing** before sending client quotes  
-- **Forecast monthly/quarterly revenue** based on pipeline events  
-- **Optimize resource allocation** (staffing, inventory, etc.)  
-- **Simulate scenarios** to understand profit sensitivity to costs
+## 📈 Visual Insights
 
----
+| Visualization | Description |
+|----------------|-------------|
+| **Pairplot / Correlation Matrix** | Reveals strong linear correlation between guests, menu tier, and revenue. |
+| **Predicted vs Actual Scatterplot** | Shows high model accuracy and low residual error. |
+| **Feature Importance Bar Chart** | Highlights which variables contribute most to revenue. |
+| **Residual Distribution Plot** | Confirms normally distributed residuals (valid regression assumptions). |
 
+Example Plots:
+```python
+plt.scatter(model.fittedvalues, y, alpha=0.6)
+plt.xlabel("Predicted Revenue")
+plt.ylabel("Actual Revenue")
+plt.title("Predicted vs Actual Revenue")
+plt.show()
